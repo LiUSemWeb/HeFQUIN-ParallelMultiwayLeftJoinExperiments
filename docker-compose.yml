@@ -1,0 +1,66 @@
+version: '3.7'
+
+x-common-environment-variables: &common-environment-variables
+  SPARQL_UPDATE: "false"
+  DEFAULT_GRAPH: "http://www.example.com/default-graph"
+  DBA_PASSWORD: "dba"
+  VIRT_SPARQL_ResultSetMaxRows: "999999999"
+  VIRT_SPARQL_MaxQueryCostEstimationTime: "0"
+  VIRT_SPARQL_MaxQueryExecutionTime: "3605"
+
+x-low-resources-environment-variables: &low-resources-environment-variables
+  VIRT_Database_MaxCheckpointRemap: "20000"       # E.g. 1/4 of VIRT_Parameters_NumberOfBuffers
+  VIRT_TempDatabase_MaxCheckpointRemap: "20000"   # E.g. 1/8 of VIRT_Parameters_NumberOfBuffers
+  VIRT_Parameters_NumberOfBuffers: "100000"
+  VIRT_Parameters_MaxDirtyBuffers: "75000"        # E.g. 3/4 of VIRT_Parameters_NumberOfBuffers
+  VIRT_Parameters_VectorSize: "10000"
+  VIRT_Parameters_MaxVectorSize: "1000000"
+  VIRT_Parameters_ThreadsPerQuery: "8"
+  VIRT_Parameters_MaxQueryMem: "1G"
+  VIRT_Parameters_HashJoinSpace: "1G"
+  VIRT_HTTPServer_KeepAliveTimeout: "10"
+
+x-medium-resources-environment-variables: &medium-resources-environment-variables
+  VIRT_Database_MaxCheckpointRemap: "40000"       # E.g. 1/4 of VIRT_Parameters_NumberOfBuffers
+  VIRT_TempDatabase_MaxCheckpointRemap: "40000"   # E.g. 1/8 of VIRT_Parameters_NumberOfBuffers
+  VIRT_Parameters_NumberOfBuffers: "200000"
+  VIRT_Parameters_MaxDirtyBuffers: "150000"       # E.g. 3/4 of VIRT_Parameters_NumberOfBuffers
+  VIRT_Parameters_VectorSize: "1000"
+  VIRT_Parameters_MaxVectorSize: "1000000"
+  VIRT_Parameters_ThreadsPerQuery: "8"
+  VIRT_Parameters_MaxQueryMem: "2G"
+  VIRT_Parameters_HashJoinSpace: "2G"
+  VIRT_HTTPServer_KeepAliveTimeout: "20"
+
+x-high-resources-environment-variables: &high-resources-environment-variables
+  VIRT_Database_MaxCheckpointRemap: "80000"       # E.g. 1/4 of VIRT_Parameters_NumberOfBuffers
+  VIRT_TempDatabase_MaxCheckpointRemap: "80000"   # E.g. 1/8 of VIRT_Parameters_NumberOfBuffers
+  VIRT_Parameters_NumberOfBuffers: "400000"
+  VIRT_Parameters_MaxDirtyBuffers: "300000"       # E.g. 3/4 of VIRT_Parameters_NumberOfBuffers
+  VIRT_Parameters_VectorSize: "2000"
+  VIRT_Parameters_MaxVectorSize: "2000000"
+  VIRT_Parameters_ThreadsPerQuery: "16"
+  VIRT_Parameters_MaxQueryMem: "4G"
+  VIRT_Parameters_HashJoinSpace: "4G"
+  VIRT_HTTPServer_KeepAliveTimeout: "30"
+
+
+services:
+  virtuoso_gtfs:
+    #privileged: false
+    container_name: virtuoso_gtfs_1
+    hostname: virtuoso_gtfs
+    image: tenforce/virtuoso
+    restart: always
+    environment:
+      <<: *common-environment-variables
+      <<: *high-resources-environment-variables
+    volumes:
+      - type: bind
+        source: ./config/sysctl.conf
+        target: /etc/sysctl.conf
+        read_only: true
+      - ./tmp/gtfs_1:/usr/local/virtuoso-opensource/var/lib/virtuoso/db/toLoad
+    ports:
+      - "8890:8890"
+      - "1111:1111"
