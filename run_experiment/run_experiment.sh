@@ -1,20 +1,7 @@
 #!/bin/bash
 
-#HeFQUIN="/Users/huali50/Downloads/HeFQUIN-main/target/HeFQUIN-0.0.1-SNAPSHOT.jar"
-#query_path="/Users/huali50/Downloads/multiwayjoin_experiments/queries/"
-log_path="/Users/huali50/Downloads/multiwayjoin_experiments/log/"
+log_path="./logs/"
 
-#number_of_runs=2
-
-#java -cp $HeFQUIN se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query $query --considerSPARQLEndpoint http://10.253.227.81:9999/bigdata/sparql
-#java -cp /Users/huali50/Downloads/HeFQUIN-main/target/HeFQUIN-0.0.1-SNAPSHOT.jar se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query /Users/huali50/Downloads/multiwayjoin_experiments/queries/query1.rq --considerSPARQLEndpoint http://10.253.227.81:9999/bigdata/sparql
-
-#args=$#                          # number of command line args
-#for (( i=1; i<=$args; i+=1 ))    # loop from 1 to N (where N is number of args)
-#do
-#  echo "HEREI"
-#    echo $i
-#done
 declare endpoints
 export query_num=$1
 echo $query_num
@@ -40,7 +27,7 @@ done
 
 echo $endpoints
 #echo $query_num
-
+mkdir logs
 for run in $(seq 1 $number_of_runs)
 do
   for query_id in $(seq 1 $query_num)
