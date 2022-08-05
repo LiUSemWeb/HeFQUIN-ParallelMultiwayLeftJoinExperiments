@@ -36,15 +36,18 @@ try:
     shutil.rmtree('fed/')
 except:
     pass
-# create an empty fed/ directory
+
+# create a fed/ directory with one directory for each federation member
 os.mkdir('fed/')
+for fed_member in range(fed_members):
+    os.mkdir('fed/member_'+str(fed_member))
 
 
 instances = list(range(number_of_instances))
 
 
 for fed_member in range(fed_members):
-    f = open('fed/member_'+str(fed_member)+'.nt', 'a')
+    f = open('fed/member_'+str(fed_member)+'/member_'+str(fed_member)+'.nt', 'a')
 
     for subclass_card in subclass_cards:
         # the subset of instances for a subclass are picked from the superclass by shuffling the list instances and then selecting
@@ -58,7 +61,7 @@ for fed_member in range(fed_members):
 
 
 for fed_member in range(fed_members):
-    f = open('fed/member_'+str(fed_member)+'.nt', 'a')
+    f = open('fed/member_'+str(fed_member)+'/member_'+str(fed_member)+'.nt', 'a')
 
     for prop_card in prop_cards:
         for num_prop in range(prop_number):
