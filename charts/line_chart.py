@@ -36,9 +36,9 @@ def Read_and_extacrt_info_from_output_file(inputfile):
         data_for_chart_AverageProcessingTime.append(averageProcessingTime)
     return data_for_chart_query_id, data_for_chart_AverageProcessingTime
 #now the needed data is extracted and stored in data_for_chart (query id and its average processing time)
-output1 = r"C:\\Users\\minab62\\PycharmProjects\\multywayJoin_chart\\output1.txt"
-output2 = r"C:\\Users\\minab62\\PycharmProjects\\multywayJoin_chart\\output2.txt"
-output3 = r"C:\\Users\\minab62\\PycharmProjects\\multywayJoin_chart\\output3.txt"
+output1 = r"output1.txt"
+output2 = r"output2.txt"
+output3 = r"output3.txt"
 
 q1, t1 = Read_and_extacrt_info_from_output_file(output1)
 q2, t2 = Read_and_extacrt_info_from_output_file(output2)
