@@ -1,0 +1,21 @@
+PREFIX example: <http://example.com/>  
+
+SELECT * WHERE{ 
+SERVICE <http://127.0.0.1:8890/sparql> {?s a example:class_0.5} 
+OPTIONAL {  	
+	SERVICE <http://127.0.0.1:8891/sparql> { ?s  example:property_card0.5_prop0_member1 ?o1 }} 
+OPTIONAL { 
+  	SERVICE <http://127.0.0.1:8892/sparql> { ?s  example:property_card0.5_prop1_member2 ?o2 }} 
+OPTIONAL {  
+	SERVICE <http://127.0.0.1:8893/sparql> { ?s  example:property_card0.5_prop2_member3 ?o3 }} 
+OPTIONAL { 
+  	SERVICE <http://127.0.0.1:8894/sparql> { ?s  example:property_card0.5_prop3_member4 ?o4 }} 
+OPTIONAL {  
+	SERVICE <http://127.0.0.1:8895/sparql> { ?s  example:property_card0.5_prop4_member5 ?o5 }} 
+OPTIONAL { 
+  	SERVICE <http://127.0.0.1:8896/sparql> { ?s  example:property_card0.5_prop5_member6 ?o6 }} 
+OPTIONAL {  
+	SERVICE <http://127.0.0.1:8897/sparql> { ?s  example:property_card0.5_prop6_member7 ?o7 }} 
+OPTIONAL { 
+  	SERVICE <http://127.0.0.1:8898/sparql> { ?s  example:property_card0.5_prop7_member8 ?o8 }} 
+}
