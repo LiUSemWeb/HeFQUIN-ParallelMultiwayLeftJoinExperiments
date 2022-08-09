@@ -11,12 +11,12 @@ export federation_num=$3
 export engine=$4
 export queries_path=$5
 export log_path=$5
-export approach_option=$6
-export endpoint=$7
+#export approach_option=$6
+export endpoint=$6
 
 for fed in $(seq 1 $federation_num)
 do
-  let ep=$fed+6
+  let ep=$fed+5
   #echo ${!ep}
   endpoints+="--considerSPARQLEndpoint "
   endpoints+=${!ep}
@@ -42,7 +42,5 @@ do
     java -cp $engine se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query ${queries_path}query${query_id}.sparql  $endpoints > $log_file_path
   done
 done
-python get_measurement.py $number_of_runs $query_num $log_path
-
-
+python3 get_measurement.py $number_of_runs $query_num $log_path
 
