@@ -39,7 +39,7 @@ do
     #java -cp $HeFQUIN se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query ${query_path}query${query_id}.rq  --considerSPARQLEndpoint $endpoint > $log_file_path
     #java -cp $HeFQUIN se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query ${query_path}query${query_id}.rq  --considerSPARQLEndpoint $endpoint > $log_file_path
     #java -cp $engine se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query ${queries_path}query${query_id}.rq  --considerSPARQLEndpoint $endpoints > $log_file_path
-    java -cp $engine se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query ${queries_path}query${query_id}.sparql  $endpoints > $log_file_path
+    java -cp $engine se.liu.ida.hefquin.cli.RunQueryWithoutSrcSel --query ${queries_path}query${query_id}.sparql --queryProcStats  $endpoints > $log_file_path
   done
 done
 python3 get_measurement.py $number_of_runs $query_num $log_path
