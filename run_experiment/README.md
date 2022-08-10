@@ -1,12 +1,10 @@
 ## Getting Started
 
 
-* run_experiment.sh NUMBER_OF_QUERIES NUM_OF_RUNS NUM_OF_FEDERATIONS PATH_OF_ENGINE PATH_OF_QUERIES APPROACH_OPTION ENDPOINTS
-
-* ./run_experiment.sh 4 2 2 /PATH/HeFQUIN-0.0.1-SNAPSHOT.jar /PATH/group1/ APPROACH_OPTION FEDERATION_1_ENDPOINT FEDERATION_2_ENDPOINT
-
+* run_experiment.sh PATH_OF_QUERIES NUM_OF_RUNS PATH_OF_ENGINE APPROACH_OPTION 
+  * APPROACH_OPTION: 1-ParallelMultiLeftJoin, 2-PhysicalOpsForLogicalAddOps (--ignoreParallelMultiLeftJoin), 3-naive (--ignoreParallelMultiLeftJoin --ignorePhysicalOpsForLogicalAddOps)
 
 Example:
 ```
-./run_experiment.sh 4 2 5 ../HeFQUIN-0.0.1-SNAPSHOT.jar ../queries/group1/ http://127.0.0.1:8890/sparql http://127.0.0.1:8891/sparql http://127.0.0.1:8892/sparql http://127.0.0.1:8893/sparql http://127.0.0.1:8894/sparql
+./run_experiment.sh ../queries/group1/ 2 ./HeFQUIN-0.0.1-SNAPSHOT.jar 1
 ```
