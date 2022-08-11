@@ -1,26 +1,29 @@
 import sys
-import json
 import csv
+import os
 
-def get_measurement(number_of_runs, number_of_queries, log_path='/Users/huali50/Downloads/multiwayjoin_experiments/log/'):
-  for query_id in range(number_of_queries):
-    query_name = 'query' + str(query_id+1)
-    measurements = []
-    with open('./query{id}.csv'.format(id=query_id+1), 'w', encoding='UTF8') as csv_file:
-      writer = csv.writer(csv_file)
-      writer.writerow(['query', 'num_of_run', 'overallQueryProcessingTime(ms)'])
-      for run in range(number_of_runs):
-        log_file = '{log_path}{query_name}-{run}.txt'.format(log_path=log_path, query_name=query_name, run=run+1)
-        content = []
+def get_measurement(number_of_runs, query_path, log_path, approach_option):
+  query_names = [os.path.basename(f).split('.')[0] for f in os.listdir(query_path) if f.endswith('.sparql')]
+  for query_name in query_names:
+    measurement_file = '{log_path}/{query}.csv'.format(log_path=log_path, query=query_name)
+    headers = ['num_of_run', 'query', 'approach', 'overallQueryProcessingTime(ms)']
+    file_exists = os.path.isfile(measurement_file)
+    with open(measurement_file, 'a', encoding='UTF8') as csv_file:
+      writer = csv.writer(csv_file, delimiter=',', lineterminator='\n')
+      #writer.writerow(['query', 'num_of_run', 'overallQueryProcessingTime(ms)'])
+      if not file_exists:
+        writer.writerow(headers)
+      for i in range(number_of_runs):
+        log_file = '{log_path}/{query}-{run}.log'.format(log_path=log_path, query=query_name, run=i+1)
         with open(log_file) as f:
-          content = f.readlines()
-          #measurements.append(content[3].rstrip())
-          #print(content[3].rstrip())
-          writer.writerow([query_name, run+1, int(content[3].rstrip().split(' : ')[1])])
+          content = f.read()
+          queryProcStats = content[content.index('overallQueryProcessingTime'):content.index('planningTime')].rstrip()
+          writer.writerow([i+1, query_name, approach_option, int(queryProcStats.split(' : ')[1])])
   return
-
 
 if __name__ == "__main__":
   number_of_runs = int(sys.argv[1])
-  number_of_queries = int(sys.argv[2])
-  get_measurement(number_of_runs, number_of_queries)
+  query_path = str(sys.argv[2])
+  log_path = str(sys.argv[3])
+  approach_option = int(sys.argv[4])
+  get_measurement(number_of_runs, query_path, log_path, approach_option)
