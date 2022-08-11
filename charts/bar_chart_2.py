@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy import sqrt
 #Read output file which is a text file
-query1 = r"C:\Users\minab62\PycharmProjects\multywayJoin_chart\logs\group1\query1.csv"
-query2 = r"C:\Users\minab62\PycharmProjects\multywayJoin_chart\logs\group1\query2.csv"
-query3 = r"C:\Users\minab62\PycharmProjects\multywayJoin_chart\logs\group1\query3.csv"
-query4 = r"C:\Users\minab62\PycharmProjects\multywayJoin_chart\logs\group1\query4.csv"
+query1 = r"C:\Users\PycharmProjects\multywayJoin_chart\logs\group1\query1.csv"
+query2 = r"C:\Users\PycharmProjects\multywayJoin_chart\logs\group1\query2.csv"
+query3 = r"C:\Users\PycharmProjects\multywayJoin_chart\logs\group1\query3.csv"
+query4 = r"C:\Users\PycharmProjects\multywayJoin_chart\logs\group1\query4.csv"
 
 file1 = open(query1, 'r')
 file2 = open(query2, 'r')
