@@ -30,14 +30,14 @@ then
 elif [[ $approach_option -eq 2 ]]
 then
    approach_config="--ignoreParallelMultiLeftJoin"
-   echo "Use toAdd (PhysicalOpsForLogicalAddOps)."
+   echo "Use tpAdd (PhysicalOpsForLogicalAddOps)."
 elif [[ $approach_option -eq 3 ]]
 then
    approach_config="--ignoreParallelMultiLeftJoin --ignorePhysicalOpsForLogicalAddOps"
    echo "Use naive approach."
 else
    echo $approach_config
-   echo "The approach option should be 1 (Using toOPTAdd), 2 (Using tpAdd) or 3 (naive)"
+   echo "The approach option should be 1 (Using tpOPTAdd), 2 (Using tpAdd) or 3 (naive)"
    exit 1
 fi
 
